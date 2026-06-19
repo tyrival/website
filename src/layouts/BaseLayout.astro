@@ -13,7 +13,7 @@ import '../styles/global.css';
     <link rel="icon" href="/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet" />
     <script is:inline>
       (() => {
         const root = document.documentElement;
@@ -22,13 +22,15 @@ import '../styles/global.css';
         const theme = storedTheme === 'light' || storedTheme === 'dark'
           ? storedTheme
           : systemDark ? 'dark' : 'light';
+        const supportedLocales = ['zh', 'en', 'fr', 'es', 'de', 'ja', 'ko'];
         const storedLanguage = localStorage.getItem('tyrival-language');
-        const language = storedLanguage === 'zh' || storedLanguage === 'en'
+        const browserLanguage = navigator.language.toLowerCase().split('-')[0];
+        const language = supportedLocales.includes(storedLanguage)
           ? storedLanguage
-          : navigator.language.toLowerCase().startsWith('zh') ? 'zh' : 'en';
+          : supportedLocales.includes(browserLanguage) ? browserLanguage : 'en';
         root.dataset.theme = theme;
         root.dataset.language = language;
-        root.lang = language === 'zh' ? 'zh-CN' : 'en';
+        root.lang = language === 'zh' ? 'zh-CN' : language;
       })();
     </script>
   </head>
@@ -41,37 +43,68 @@ import '../styles/global.css';
         const root = document.documentElement;
         const themeButton = document.querySelector('[data-theme-toggle]');
         const languageButton = document.querySelector('[data-language-toggle]');
+        const languageMenu = document.querySelector('[data-language-menu]');
+        const localeButtons = Array.from(document.querySelectorAll('[data-locale]'));
         const themeMeta = document.querySelector('meta[name="theme-color"]');
+        const supportedLocales = ['zh', 'en', 'fr', 'es', 'de', 'ja', 'ko'];
+
+        const closeLanguageMenu = () => {
+          if (!languageButton || !languageMenu) return;
+          languageButton.setAttribute('aria-expanded', 'false');
+          languageMenu.hidden = true;
+        };
+
+        const openLanguageMenu = () => {
+          if (!languageButton || !languageMenu) return;
+          languageButton.setAttribute('aria-expanded', 'true');
+          languageMenu.hidden = false;
+        };
 
         const applyLanguage = (language, persist = true) => {
+          if (!supportedLocales.includes(language)) language = 'en';
           root.dataset.language = language;
-          root.lang = language === 'zh' ? 'zh-CN' : 'en';
+          const activeLocale = localeButtons.find((button) => button.dataset.locale === language);
+          root.lang = activeLocale?.dataset.htmlLang || language;
           document.querySelectorAll('[data-i18n]').forEach((node) => {
-            const value = node.dataset[language === 'zh' ? 'i18nZh' : 'i18nEn'];
+            const value = node.getAttribute(`data-i18n-${language}`);
             if (value) node.textContent = value;
           });
           if (languageButton) {
-            languageButton.querySelector('[data-language-indicator]').textContent = language === 'zh' ? 'EN' : '中文';
-            languageButton.setAttribute('aria-label', languageButton.dataset[language === 'zh' ? 'labelZh' : 'labelEn']);
+            languageButton.querySelector('[data-language-indicator]').textContent = activeLocale?.dataset.localeLabel || language.toUpperCase();
+            languageButton.setAttribute('aria-label', languageButton.getAttribute(`data-label-${language}`));
           }
+          localeButtons.forEach((button) => button.setAttribute('aria-checked', String(button.dataset.locale === language)));
           if (persist) localStorage.setItem('tyrival-language', language);
           updateThemeControl();
+          closeLanguageMenu();
         };
 
         const updateThemeControl = () => {
           if (!themeButton) return;
-          const language = root.dataset.language === 'en' ? 'en' : 'zh';
+          const language = supportedLocales.includes(root.dataset.language) ? root.dataset.language : 'en';
           const isDark = root.dataset.theme === 'dark';
-          const key = isDark
-            ? language === 'zh' ? 'lightLabelZh' : 'lightLabelEn'
-            : language === 'zh' ? 'darkLabelZh' : 'darkLabelEn';
-          themeButton.setAttribute('aria-label', themeButton.dataset[key]);
+          const labelType = isDark ? 'light' : 'dark';
+          themeButton.setAttribute('aria-label', themeButton.getAttribute(`data-${labelType}-label-${language}`));
           themeButton.setAttribute('aria-pressed', String(isDark));
           if (themeMeta) themeMeta.setAttribute('content', isDark ? '#0a0d12' : '#f5f6f8');
         };
 
         languageButton?.addEventListener('click', () => {
-          applyLanguage(root.dataset.language === 'zh' ? 'en' : 'zh');
+          const isOpen = languageButton.getAttribute('aria-expanded') === 'true';
+          isOpen ? closeLanguageMenu() : openLanguageMenu();
+        });
+
+        localeButtons.forEach((button) => button.addEventListener('click', () => applyLanguage(button.dataset.locale)));
+
+        document.addEventListener('click', (event) => {
+          if (!event.target.closest('.language-picker')) closeLanguageMenu();
+        });
+
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') {
+            closeLanguageMenu();
+            languageButton?.focus();
+          }
         });
 
         themeButton?.addEventListener('click', () => {
@@ -87,7 +120,7 @@ import '../styles/global.css';
           }
         });
 
-        applyLanguage(root.dataset.language === 'en' ? 'en' : 'zh', false);
+        applyLanguage(root.dataset.language, false);
       })();
     </script>
   </body>

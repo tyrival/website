@@ -1,5 +1,5 @@
 ---
-import { controls, navigation } from '../content/portfolio';
+import { controls, localeOptions, localizedAttributes, navigation } from '../content/portfolio';
 ---
 
 <header class="site-header">
@@ -10,41 +10,51 @@ import { controls, navigation } from '../content/portfolio';
     </a>
 
     <nav class="site-nav" aria-label="Primary navigation">
-      <a
-        href="#products"
-        data-i18n
-        data-i18n-zh={navigation.work.zh}
-        data-i18n-en={navigation.work.en}
-      >{navigation.work.zh}</a>
-      <a href="https://github.com/tyrival" target="_blank" rel="noopener noreferrer">
-        {navigation.github.zh}
-      </a>
+      <a href="#products" data-i18n {...localizedAttributes(navigation.work)}>{navigation.work.zh}</a>
+      <a href="https://github.com/tyrival" target="_blank" rel="noopener noreferrer">GitHub</a>
     </nav>
 
     <div class="site-controls">
-      <button
-        class="control-button language-toggle"
-        type="button"
-        data-language-toggle
-        data-label-zh={controls.language.zh}
-        data-label-en={controls.language.en}
-        aria-label={controls.language.zh}
-      >
-        <span data-language-indicator>EN</span>
-      </button>
+      <div class="language-picker">
+        <button
+          class="control-button language-toggle"
+          type="button"
+          data-language-toggle
+          {...Object.fromEntries(Object.entries(localizedAttributes(controls.language)).map(([key, value]) => [key.replace('data-i18n-', 'data-label-'), value]))}
+          aria-label={controls.language.zh}
+          aria-haspopup="menu"
+          aria-expanded="false"
+          aria-controls="language-menu"
+        >
+          <span data-language-indicator>ZH</span>
+          <span class="language-toggle__chevron" aria-hidden="true">⌄</span>
+        </button>
+        <div id="language-menu" class="language-menu" data-language-menu role="menu" hidden>
+          {localeOptions.map((locale) => (
+            <button
+              type="button"
+              role="menuitemradio"
+              data-locale={locale.id}
+              data-locale-label={locale.shortLabel}
+              data-html-lang={locale.htmlLang}
+              aria-checked={locale.id === 'zh' ? 'true' : 'false'}
+            >
+              <span>{locale.label}</span><small>{locale.shortLabel}</small>
+            </button>
+          ))}
+        </div>
+      </div>
       <button
         class="control-button theme-toggle"
         type="button"
         data-theme-toggle
-        data-light-label-zh={controls.themeLight.zh}
-        data-light-label-en={controls.themeLight.en}
-        data-dark-label-zh={controls.themeDark.zh}
-        data-dark-label-en={controls.themeDark.en}
+        {...Object.fromEntries(Object.entries(localizedAttributes(controls.themeLight)).map(([key, value]) => [key.replace('data-i18n-', 'data-light-label-'), value]))}
+        {...Object.fromEntries(Object.entries(localizedAttributes(controls.themeDark)).map(([key, value]) => [key.replace('data-i18n-', 'data-dark-label-'), value]))}
         aria-label={controls.themeDark.zh}
         aria-pressed="false"
       >
-        <span class="theme-toggle__sun" aria-hidden="true"></span>
-        <span class="theme-toggle__moon" aria-hidden="true"></span>
+        <span class="theme-toggle__moon" aria-hidden="true">☾</span>
+        <span class="theme-toggle__sun" aria-hidden="true">☀</span>
       </button>
     </div>
   </div>

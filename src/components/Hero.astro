@@ -1,10 +1,14 @@
+---
+import { heroScroll, localizedAttributes } from '../content/portfolio';
+---
+
 <section class="hero" id="top" aria-labelledby="hero-title">
   <p class="hero__eyebrow">Full-Stack Engineer / Product Builder</p>
   <h1 id="hero-title">
-    Talking is cheap,<br />show me the <del>code</del> <span>product</span>.
+    Talking is cheap,<br />show me the <del>code</del>&nbsp;<span>product</span>.
   </h1>
   <a class="hero__scroll" href="#products">
     <span aria-hidden="true">↓</span>
-    <span data-i18n data-i18n-zh="查看产品" data-i18n-en="Explore products">查看产品</span>
+    <span data-i18n {...localizedAttributes(heroScroll)}>{heroScroll.zh}</span>
   </a>
 </section>

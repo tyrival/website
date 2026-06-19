@@ -1,11 +1,11 @@
 ---
-import { footerCopy } from '../content/portfolio';
+import { footerCopy, localizedAttributes } from '../content/portfolio';
 ---
 
 <footer class="site-footer">
   <div>
     <strong>Tyrival Chow</strong>
-    <p data-i18n data-i18n-zh={footerCopy.zh} data-i18n-en={footerCopy.en}>{footerCopy.zh}</p>
+    <p data-i18n {...localizedAttributes(footerCopy)}>{footerCopy.zh}</p>
   </div>
   <a href="https://github.com/tyrival" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
   <span class="site-footer__copyright">&copy; {new Date().getFullYear()}</span>

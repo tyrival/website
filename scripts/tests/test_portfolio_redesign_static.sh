@@ -35,7 +35,19 @@ require 'data-i18n' src
 require 'localStorage' src/layouts/BaseLayout.astro
 require 'prefers-color-scheme' src/layouts/BaseLayout.astro
 require 'data-language-toggle' src/components/SiteHeader.astro
+require 'data-language-menu' src/components/SiteHeader.astro
+require 'aria-expanded' src/components/SiteHeader.astro
 require 'data-theme-toggle' src/components/SiteHeader.astro
+require '☀' src/components/SiteHeader.astro
+require '☾' src/components/SiteHeader.astro
+require 'Manrope' src/layouts/BaseLayout.astro
+require '&nbsp;' src/components/Hero.astro
 require '@media.*max-width' src/styles/global.css
+
+for locale in zh en fr es de ja ko; do
+  require "'$locale'" src/content/portfolio.ts
+done
+
+forbid "root.dataset.language === 'zh' \? 'en' : 'zh'" src/layouts/BaseLayout.astro
 
 echo "portfolio redesign static contracts passed"

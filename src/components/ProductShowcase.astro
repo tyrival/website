@@ -1,5 +1,5 @@
 ---
-import type { Product } from '../content/portfolio';
+import { localizedAttributes, type Product } from '../content/portfolio';
 
 interface Props {
   product: Product;
@@ -15,8 +15,7 @@ const { product } = Astro.props;
       <h2 id={`${product.id}-title`}>{product.name}</h2>
       <p
         data-i18n
-        data-i18n-zh={product.description.zh}
-        data-i18n-en={product.description.en}
+        {...localizedAttributes(product.description)}
       >{product.description.zh}</p>
       <div class="product-tags" aria-label={`${product.name} technologies`}>
         {product.tags.map((tag) => <span>{tag}</span>)}
@@ -27,8 +26,7 @@ const { product } = Astro.props;
         <a href={link.url} target="_blank" rel="noopener noreferrer">
           <span
             data-i18n
-            data-i18n-zh={link.label.zh}
-            data-i18n-en={link.label.en}
+            {...localizedAttributes(link.label)}
           >{link.label.zh}</span>
           <span aria-hidden="true">↗</span>
         </a>
