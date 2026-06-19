@@ -8,7 +8,7 @@ export interface ProductLink {
 }
 
 export interface Product {
-  id: 'viabar' | 'commukit' | 'vision';
+  id: 'viabar' | 'commukit' | 'fringe' | 'vision';
   index: string;
   name: string;
   description: LocalizedText;
@@ -119,8 +119,32 @@ export const products: Product[] = [
     ],
   },
   {
-    id: 'vision',
+    id: 'fringe',
     index: '03',
+    name: 'Fringe',
+    description: {
+      zh: '一款剪贴板增强与便签管理工具，支持富文本编辑、颜色标签、搜索与备份。',
+      en: 'A clipboard enhancement and note management tool with rich text editing, color tags, search, and backup.',
+      fr: 'Un outil d\'amélioration du presse-papiers et de gestion de notes avec édition de texte enrichi, étiquettes de couleur, recherche et sauvegarde.',
+      es: 'Una herramienta de mejora del portapapeles y gestión de notas con edición de texto enriquecido, etiquetas de color, búsqueda y copia de seguridad.',
+      de: 'Ein Clipboard-Erweiterungs- und Notizverwaltungstool mit Rich-Text-Bearbeitung, Farb-Tags, Suche und Backup.',
+      ja: 'リッチテキスト編集、カラータグ、検索、バックアップを備えたクリップボード強化とメモ管理ツール。',
+      ko: '리치 텍스트 편집, 색상 태그, 검색 및 백업을 갖춘 클립보드 강화 및 메모 관리 도구입니다.',
+    },
+    tags: ['macOS', 'Clipboard', 'SwiftUI'],
+    links: [
+      {
+        label: {
+          zh: '产品官网', en: 'Website', fr: 'Site officiel', es: 'Sitio web', de: 'Website',
+          ja: '公式サイト', ko: '공식 웹사이트',
+        },
+        url: 'https://fringe.tyrival.com/',
+      },
+    ],
+  },
+  {
+    id: 'vision',
+    index: '04',
     name: 'Vision',
     description: {
       zh: '所见即所得的数据可视化驾驶舱平台',

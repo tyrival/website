@@ -1,0 +1,299 @@
+<div class="fringe-app" aria-label="Fringe application interface preview">
+  <div class="fringe-titlebar">
+    <div class="traffic-lights" aria-hidden="true"><i></i><i></i><i></i></div>
+    <span>Fringe</span>
+  </div>
+
+  <div class="fringe-toolbar">
+    <div class="search-box">⌕ &nbsp;Search notes</div>
+    <div class="toolbar-actions">
+      <span class="tool-btn active"><i class="icon-bold">B</i></span>
+      <span class="tool-btn"><i class="icon-italic">I</i></span>
+      <span class="tool-btn"><i class="icon-code">&lt;/&gt;</i></span>
+      <span class="color-dot blue"></span>
+      <span class="color-dot red"></span>
+      <span class="color-dot green"></span>
+      <span class="color-dot yellow"></span>
+    </div>
+  </div>
+
+  <div class="fringe-cards">
+    <!-- Card 1: Rich text note -->
+    <article class="fringe-card">
+      <span class="card-accent" style="--card-color:#5A7FEF"></span>
+      <div class="card-body">
+        <div class="card-header">
+          <span class="card-time">14:32</span>
+          <span class="card-app">VS Code</span>
+        </div>
+        <p class="card-content">
+          <b>Meeting notes</b> for Q3 planning<br />
+          <i>Quick idea</i> — add dark mode toggle<br />
+          <span class="strike">Old task</span> completed<br />
+          <span class="inline-code">npm run build</span>
+        </p>
+      </div>
+    </article>
+
+    <!-- Card 2: Simple note -->
+    <article class="fringe-card">
+      <span class="card-accent" style="--card-color:#EF5A5A"></span>
+      <div class="card-body">
+        <div class="card-header">
+          <span class="card-time">13:15</span>
+          <span class="card-app">Figma</span>
+        </div>
+        <p class="card-content">
+          <b>Design review</b><br />
+          Update button states to match new design system tokens
+        </p>
+      </div>
+    </article>
+
+    <!-- Card 3: Code snippet -->
+    <article class="fringe-card">
+      <span class="card-accent" style="--card-color:#5AEF7F"></span>
+      <div class="card-body">
+        <div class="card-header">
+          <span class="card-time">11:08</span>
+          <span class="card-app">Terminal</span>
+        </div>
+        <p class="card-content">
+          <span class="code-block">git commit -m "feat: add clipboard<br />manager with color tags"</span>
+        </p>
+      </div>
+    </article>
+
+    <!-- Card 4: Colored tag -->
+    <article class="fringe-card colored" style="--card-tint:rgba(239,200,90,0.08)">
+      <span class="card-accent" style="--card-color:#EFC85A"></span>
+      <div class="card-body">
+        <div class="card-header">
+          <span class="card-time">09:42</span>
+          <span class="card-app">Slack</span>
+        </div>
+        <p class="card-content">
+          <b>Deploy checklist</b><br />
+          Run tests, bump version, tag release, push to App Store
+        </p>
+      </div>
+    </article>
+
+    <!-- Card 5 -->
+    <article class="fringe-card">
+      <span class="card-accent" style="--card-color:#5A7FEF"></span>
+      <div class="card-body">
+        <div class="card-header">
+          <span class="card-time">08:30</span>
+          <span class="card-app">Xcode</span>
+        </div>
+        <p class="card-content">
+          <b>Bug fix</b><br />
+          Resolved clipboard polling race condition on app activation
+        </p>
+      </div>
+    </article>
+  </div>
+</div>
+
+<style>
+  .fringe-app {
+    min-width: 720px;
+    overflow: hidden;
+    border: 1px solid var(--preview-border);
+    border-radius: 18px;
+    background: var(--preview-bg);
+    color: var(--preview-text);
+    box-shadow: var(--preview-shadow);
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  /* Title bar */
+  .fringe-titlebar {
+    height: 40px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 0 15px;
+    border-bottom: 1px solid var(--preview-border);
+    color: var(--preview-muted);
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .traffic-lights { display: flex; gap: 7px; }
+  .traffic-lights i { width: 11px; height: 11px; border-radius: 50%; background: #ff5f57; }
+  .traffic-lights i:nth-child(2) { background: #febc2e; }
+  .traffic-lights i:nth-child(3) { background: #28c840; }
+
+  /* Toolbar */
+  .fringe-toolbar {
+    height: 46px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 14px;
+    border-bottom: 1px solid var(--preview-border);
+    background: var(--preview-panel);
+  }
+
+  .search-box {
+    flex: 1;
+    max-width: 200px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    border: 1px solid var(--preview-border);
+    border-radius: 14px;
+    background: var(--preview-canvas);
+    color: var(--preview-faint);
+    font-size: 9px;
+  }
+
+  .toolbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: auto;
+  }
+
+  .tool-btn {
+    width: 26px;
+    height: 26px;
+    display: grid;
+    place-items: center;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--preview-muted);
+    font-size: 9px;
+    cursor: default;
+    transition: background .15s ease;
+  }
+
+  .tool-btn.active {
+    border-color: color-mix(in srgb, var(--accent) 25%, transparent);
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+    color: var(--accent);
+  }
+
+  .icon-bold { font-weight: 750; font-style: normal; }
+  .icon-italic { font-style: italic; }
+  .icon-code { font-family: "JetBrains Mono", monospace; font-size: 7px; }
+
+  .color-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1.5px solid var(--preview-border);
+    cursor: default;
+  }
+  .color-dot.blue  { background: #5A7FEF; }
+  .color-dot.red   { background: #EF5A5A; }
+  .color-dot.green { background: #5AEF7F; }
+  .color-dot.yellow { background: #EFC85A; }
+
+  /* Cards area */
+  .fringe-cards {
+    display: flex;
+    gap: 10px;
+    padding: 12px;
+    overflow-x: auto;
+    background: var(--preview-canvas);
+  }
+
+  .fringe-card {
+    position: relative;
+    flex-shrink: 0;
+    width: 196px;
+    min-height: 120px;
+    border: 1px solid var(--preview-border);
+    border-radius: 14px;
+    background: var(--preview-panel-strong);
+    overflow: hidden;
+  }
+
+  .fringe-card.colored {
+    background: var(--card-tint);
+  }
+
+  .card-accent {
+    position: absolute;
+    inset: 6px auto 6px 0;
+    width: 3px;
+    border-radius: 0 2px 2px 0;
+    background: var(--card-color);
+  }
+
+  .card-body {
+    padding: 12px 12px 12px 18px;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .card-time {
+    color: var(--preview-faint);
+    font-size: 8px;
+    font-family: "JetBrains Mono", monospace;
+  }
+
+  .card-app {
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: var(--preview-canvas);
+    color: var(--preview-faint);
+    font-size: 7px;
+  }
+
+  .card-content {
+    margin: 0;
+    color: var(--preview-text);
+    font-size: 10px;
+    line-height: 1.65;
+  }
+
+  .card-content b {
+    font-weight: 650;
+  }
+
+  .card-content i {
+    font-style: italic;
+    color: var(--preview-muted);
+  }
+
+  .strike {
+    text-decoration: line-through;
+    color: var(--preview-faint);
+  }
+
+  .inline-code {
+    display: inline-block;
+    padding: 1px 5px;
+    border-radius: 4px;
+    background: var(--preview-canvas);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 8px;
+    color: var(--preview-muted);
+  }
+
+  .code-block {
+    display: block;
+    padding: 6px 8px;
+    border-radius: 6px;
+    background: var(--preview-canvas);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 8px;
+    color: var(--preview-muted);
+    word-break: break-all;
+  }
+
+  @media (max-width: 820px) {
+    .fringe-app { min-width: 640px; }
+    .fringe-card { width: 170px; }
+  }
+</style>

@@ -6,10 +6,11 @@ import ProductShowcase from '../components/ProductShowcase.astro';
 import Footer from '../components/Footer.astro';
 import ViabarPreview from '../components/previews/ViabarPreview.astro';
 import CommuKitPreview from '../components/previews/CommuKitPreview.astro';
+import FringePreview from '../components/previews/FringePreview.astro';
 import VisionPreview from '../components/previews/VisionPreview.astro';
 import { products } from '../content/portfolio';
 
-const [viabar, commukit, vision] = products;
+const [viabar, commukit, fringe, vision] = products;
 ---
 
 <BaseLayout>
@@ -19,6 +20,7 @@ const [viabar, commukit, vision] = products;
     <div id="products" class="products" aria-label="Selected products">
       <ProductShowcase product={viabar}><ViabarPreview /></ProductShowcase>
       <ProductShowcase product={commukit}><CommuKitPreview /></ProductShowcase>
+      <ProductShowcase product={fringe}><FringePreview /></ProductShowcase>
       <ProductShowcase product={vision}><VisionPreview /></ProductShowcase>
     </div>
     <Footer />
