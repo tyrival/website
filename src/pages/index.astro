@@ -1,30 +1,26 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Terminal from '../components/Terminal.astro';
+import SiteHeader from '../components/SiteHeader.astro';
 import Hero from '../components/Hero.astro';
-import SkillsGrid from '../components/SkillsGrid.astro';
-import ProductCard from '../components/ProductCard.astro';
+import ProductShowcase from '../components/ProductShowcase.astro';
 import Footer from '../components/Footer.astro';
-import products from '../content/products.json';
+import ViabarPreview from '../components/previews/ViabarPreview.astro';
+import CommuKitPreview from '../components/previews/CommuKitPreview.astro';
+import VisionPreview from '../components/previews/VisionPreview.astro';
+import { products } from '../content/portfolio';
+
+const [viabar, commukit, vision] = products;
 ---
 
 <BaseLayout>
-  <Terminal />
-  <Hero />
-  <SkillsGrid />
-
-  <section class="mb-8">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      {products.map((product) => (
-        <ProductCard
-          name={product.name}
-          description={product.description}
-          tags={product.tags}
-          links={product.links}
-        />
-      ))}
+  <SiteHeader />
+  <div class="page-shell">
+    <Hero />
+    <div id="products" class="products" aria-label="Selected products">
+      <ProductShowcase product={viabar}><ViabarPreview /></ProductShowcase>
+      <ProductShowcase product={commukit}><CommuKitPreview /></ProductShowcase>
+      <ProductShowcase product={vision}><VisionPreview /></ProductShowcase>
     </div>
-  </section>
-
-  <Footer />
+    <Footer />
+  </div>
 </BaseLayout>

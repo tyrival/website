@@ -1,0 +1,44 @@
+---
+import type { Product } from '../content/portfolio';
+
+interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props;
+---
+
+<section class="product-section" id={product.id} aria-labelledby={`${product.id}-title`}>
+  <div class="product-intro">
+    <span class="product-index">{product.index}</span>
+    <div class="product-copy">
+      <h2 id={`${product.id}-title`}>{product.name}</h2>
+      <p
+        data-i18n
+        data-i18n-zh={product.description.zh}
+        data-i18n-en={product.description.en}
+      >{product.description.zh}</p>
+      <div class="product-tags" aria-label={`${product.name} technologies`}>
+        {product.tags.map((tag) => <span>{tag}</span>)}
+      </div>
+    </div>
+    <div class="product-links">
+      {product.links.map((link) => (
+        <a href={link.url} target="_blank" rel="noopener noreferrer">
+          <span
+            data-i18n
+            data-i18n-zh={link.label.zh}
+            data-i18n-en={link.label.en}
+          >{link.label.zh}</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <div class="product-preview-shell">
+    <div class="product-preview-scroll">
+      <slot />
+    </div>
+  </div>
+</section>

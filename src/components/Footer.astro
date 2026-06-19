@@ -1,21 +1,12 @@
 ---
+import { footerCopy } from '../content/portfolio';
 ---
 
-<footer class="mt-24 border-t border-surface pt-8">
-  <div class="flex flex-wrap items-center justify-between gap-4">
-    <p class="font-mono text-xs text-secondary">
-      &copy; {new Date().getFullYear()} Tyrival Chow
-    </p>
-    <div class="flex gap-6">
-      <a
-        href="https://github.com/tyrival"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="group inline-flex items-center gap-1 font-mono text-xs text-secondary transition-colors hover:text-mint"
-      >
-        GitHub
-        <span class="inline-block transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
-      </a>
-    </div>
+<footer class="site-footer">
+  <div>
+    <strong>Tyrival Chow</strong>
+    <p data-i18n data-i18n-zh={footerCopy.zh} data-i18n-en={footerCopy.en}>{footerCopy.zh}</p>
   </div>
+  <a href="https://github.com/tyrival" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+  <span class="site-footer__copyright">&copy; {new Date().getFullYear()}</span>
 </footer>
