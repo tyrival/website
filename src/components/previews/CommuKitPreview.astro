@@ -1,0 +1,88 @@
+<div class="commukit-app" aria-label="CommuKit application interface preview">
+  <div class="app-titlebar">
+    <div class="traffic-lights" aria-hidden="true"><i></i><i></i><i></i></div>
+    <span>CommuKit — Connection Workbench</span>
+    <span class="status-light">● Connected</span>
+  </div>
+
+  <div class="commukit-tabs">
+    <span class="active"><i></i>Modbus Device <b>×</b></span>
+    <span>MQTT Broker <b>×</b></span>
+    <button aria-label="New session">＋</button>
+  </div>
+
+  <div class="commukit-workspace">
+    <aside class="connection-sidebar">
+      <div class="sidebar-heading"><span>Connections</span><b>＋</b></div>
+      <div class="search-field">⌕ &nbsp;Search</div>
+      <div class="tree-group"><i></i><strong>Factory Floor</strong><small>3</small></div>
+      <div class="tree-row active"><span class="device-dot blue"></span><div><b>Modbus Device</b><small>192.168.1.100:502</small></div></div>
+      <div class="tree-row"><span class="device-dot green"></span><div><b>MQTT Broker</b><small>broker.local:1883</small></div></div>
+      <div class="tree-row"><span class="device-dot orange"></span><div><b>TCP Server</b><small>0.0.0.0:9000</small></div></div>
+      <div class="tree-group tools"><i></i><strong>Tools</strong></div>
+      <div class="tool-grid"><span>Ping</span><span>Port Scan</span><span>DNS</span><span>SSL</span></div>
+    </aside>
+
+    <section class="message-workspace">
+      <div class="connection-bar">
+        <div><span class="connected-pill">Connected</span><b>TCP → 192.168.1.100:502</b></div>
+        <div class="bar-actions"><span>HEX</span><span>AUTO</span><b>•••</b></div>
+      </div>
+
+      <div class="message-stream">
+        <div class="message sent"><small>TX · 14:32:01.024</small><code>01 03 00 00 00 02 C4 0B</code></div>
+        <div class="message received"><small>RX · 14:32:01.062</small><code>01 03 04 00 64 00 C8 FA 1D</code></div>
+        <div class="parser-result">
+          <div class="parser-label"><span>✓</span> Parser <small>MODBUS RTU Response</small></div>
+          <div class="register"><span>Register[0]</span><b>100</b><code>0x0064</code></div>
+          <div class="register"><span>Register[1]</span><b>200</b><code>0x00C8</code></div>
+          <div class="crc">CRC-16 &nbsp; 0xFA1D &nbsp; Valid</div>
+        </div>
+        <div class="message sent"><small>TX · 14:32:05.311</small><code>01 03 00 01 00 01 D5 CA</code></div>
+      </div>
+
+      <div class="composer">
+        <div class="composer-tools"><span>HEX</span><span>UTF-8</span><span>⌘ Enter to send</span></div>
+        <div class="composer-input"><code>01 03 00 02 00 02</code><button aria-label="Send message">↑</button></div>
+      </div>
+    </section>
+
+    <aside class="session-inspector">
+      <p class="inspector-label">Session</p>
+      <div class="inspector-row"><span>Protocol</span><b>Modbus TCP</b></div>
+      <div class="inspector-row"><span>Mode</span><b>Master</b></div>
+      <div class="inspector-row"><span>Unit ID</span><b>1</b></div>
+      <p class="inspector-label pipeline">Pipeline</p>
+      <div class="pipeline-step"><i>1</i><div><b>PARSE</b><span>Extract registers</span></div></div>
+      <div class="pipeline-line"></div>
+      <div class="pipeline-step"><i>2</i><div><b>COMPUTE</b><span>Scale raw values</span></div></div>
+      <div class="pipeline-line"></div>
+      <div class="pipeline-step"><i>3</i><div><b>VALIDATE</b><span>CRC-16 check</span></div></div>
+    </aside>
+  </div>
+</div>
+
+<style>
+  .commukit-app { min-width: 820px; overflow: hidden; border: 1px solid var(--preview-border); border-radius: 18px; background: var(--preview-bg); color: var(--preview-text); box-shadow: var(--preview-shadow); font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+  .app-titlebar { height: 42px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0 15px; border-bottom: 1px solid var(--preview-border); color: var(--preview-muted); font-size: 10px; font-weight: 600; }
+  .traffic-lights { display: flex; gap: 7px; }.traffic-lights i { width: 11px; height: 11px; border-radius: 50%; background: #ff5f57; }.traffic-lights i:nth-child(2) { background: #febc2e; }.traffic-lights i:nth-child(3) { background: #28c840; }
+  .status-light { justify-self: end; color: #31be72; font-size: 9px; }
+  .commukit-tabs { height: 34px; display: flex; align-items: end; gap: 2px; padding-left: 180px; border-bottom: 1px solid var(--preview-border); background: var(--preview-canvas); }
+  .commukit-tabs > span { height: 30px; min-width: 132px; display: flex; align-items: center; gap: 7px; padding: 0 10px; border: 1px solid transparent; border-bottom: 0; color: var(--preview-faint); font-size: 9px; }
+  .commukit-tabs > span.active { border-color: var(--preview-border); border-radius: 7px 7px 0 0; background: var(--preview-bg); color: var(--preview-text); }
+  .commukit-tabs span i { width: 6px; height: 6px; border-radius: 50%; background: #31be72; }.commukit-tabs span b { margin-left: auto; font-weight: 400; }.commukit-tabs button { width: 29px; height: 29px; border: 0; background: transparent; color: var(--preview-faint); }
+  .commukit-workspace { height: 390px; display: grid; grid-template-columns: 180px minmax(380px, 1fr) 185px; background: var(--preview-bg); }
+  .connection-sidebar { padding: 12px 9px; border-right: 1px solid var(--preview-border); background: var(--preview-panel); }
+  .sidebar-heading { display: flex; justify-content: space-between; padding: 0 6px 9px; color: var(--preview-faint); font-size: 9px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }.sidebar-heading b { color: var(--accent); font-size: 14px; }
+  .search-field { height: 27px; display: flex; align-items: center; margin-bottom: 9px; padding: 0 8px; border: 1px solid var(--preview-border); border-radius: 7px; color: var(--preview-faint); font-size: 9px; }
+  .tree-group { display: flex; align-items: center; gap: 6px; padding: 8px 5px 5px; font-size: 9px; }.tree-group i { width: 6px; height: 6px; border: solid var(--preview-faint); border-width: 0 1px 1px 0; transform: rotate(45deg); }.tree-group small { margin-left: auto; color: var(--preview-faint); }
+  .tree-row { min-height: 42px; display: flex; align-items: center; gap: 8px; margin: 2px 0; padding: 6px 7px; border: 1px solid transparent; border-radius: 8px; }.tree-row.active { border-color: color-mix(in srgb, var(--accent) 20%, transparent); background: color-mix(in srgb, var(--accent) 9%, transparent); }.device-dot { width: 7px; height: 7px; border-radius: 50%; }.device-dot.blue { background: var(--accent); }.device-dot.green { background: #31be72; }.device-dot.orange { background: #ff9f0a; }.tree-row div { min-width: 0; }.tree-row b, .tree-row small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }.tree-row b { font-size: 9px; }.tree-row small { margin-top: 3px; color: var(--preview-faint); font-size: 7px; }.tools { margin-top: 12px; border-top: 1px solid var(--preview-border); }.tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }.tool-grid span { padding: 6px; border: 1px solid var(--preview-border); border-radius: 6px; color: var(--preview-muted); font-size: 8px; text-align: center; }
+  .message-workspace { min-width: 0; display: flex; flex-direction: column; background: var(--preview-canvas); }
+  .connection-bar { height: 40px; display: flex; align-items: center; justify-content: space-between; padding: 0 13px; border-bottom: 1px solid var(--preview-border); background: var(--preview-panel); }.connection-bar > div { display: flex; align-items: center; gap: 8px; }.connection-bar b { font-size: 8px; }.connected-pill { padding: 3px 6px; border-radius: 10px; background: color-mix(in srgb, #31be72 12%, transparent); color: #31be72; font-size: 7px; font-weight: 700; }.bar-actions span { padding: 3px 5px; border: 1px solid var(--preview-border); border-radius: 4px; color: var(--preview-faint); font-size: 7px; }
+  .message-stream { flex: 1; display: flex; flex-direction: column; gap: 10px; padding: 12px; overflow: hidden; }
+  .message { display: flex; flex-direction: column; align-items: flex-start; }.message.sent { align-items: flex-end; }.message small { margin: 0 4px 3px; color: var(--preview-faint); font-size: 7px; }.message code { padding: 8px 11px; border: 1px solid var(--preview-border); border-radius: 12px 12px 12px 4px; background: var(--preview-panel-strong); color: var(--preview-text); font-size: 9px; }.message.sent code { border-color: var(--accent); border-radius: 12px 12px 4px 12px; background: var(--accent); color: white; }
+  .parser-result { width: 77%; padding: 9px 10px; border: 1px solid color-mix(in srgb, #31be72 25%, transparent); border-radius: 11px; background: color-mix(in srgb, #31be72 6%, var(--preview-panel)); }.parser-label { display: flex; align-items: center; gap: 5px; margin-bottom: 6px; color: #31be72; font-size: 8px; font-weight: 700; }.parser-label small { margin-left: auto; color: var(--preview-faint); font-weight: 400; }.register { display: grid; grid-template-columns: 1fr 38px 55px; padding: 3px 0; border-top: 1px solid color-mix(in srgb, #31be72 13%, transparent); font-size: 8px; }.register b { color: var(--accent); }.register code { color: var(--preview-faint); }.crc { margin-top: 4px; color: #31be72; font: 7px "JetBrains Mono", monospace; }
+  .composer { padding: 8px 11px 11px; border-top: 1px solid var(--preview-border); background: var(--preview-panel); }.composer-tools { display: flex; gap: 5px; margin-bottom: 5px; color: var(--preview-faint); font-size: 7px; }.composer-tools span:last-child { margin-left: auto; }.composer-input { height: 34px; display: flex; align-items: center; padding-left: 10px; border: 1px solid var(--preview-border); border-radius: 9px; background: var(--preview-canvas); }.composer-input code { flex: 1; color: var(--preview-muted); font-size: 9px; }.composer-input button { width: 25px; height: 25px; margin-right: 4px; border: 0; border-radius: 7px; background: var(--accent); color: white; }
+  .session-inspector { padding: 13px; border-left: 1px solid var(--preview-border); background: var(--preview-panel); }.inspector-label { margin: 0 0 8px; color: var(--preview-faint); font-size: 9px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }.inspector-row { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid var(--preview-border); font-size: 8px; }.inspector-row span { color: var(--preview-faint); }.pipeline { margin-top: 18px; }.pipeline-step { display: flex; align-items: center; gap: 8px; }.pipeline-step i { width: 20px; height: 20px; display: grid; place-items: center; border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); border-radius: 50%; background: color-mix(in srgb, var(--accent) 8%, transparent); color: var(--accent); font-size: 8px; font-style: normal; }.pipeline-step b, .pipeline-step span { display: block; }.pipeline-step b { font-size: 8px; }.pipeline-step span { margin-top: 2px; color: var(--preview-faint); font-size: 7px; }.pipeline-line { width: 1px; height: 13px; margin-left: 10px; background: var(--preview-border); }
+  @media (max-width: 980px) { .commukit-workspace { grid-template-columns: 160px minmax(380px, 1fr); } .session-inspector { display: none; } .commukit-tabs { padding-left: 160px; } }
+</style>

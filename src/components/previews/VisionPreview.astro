@@ -1,0 +1,131 @@
+---
+const bars = [64, 82, 52, 91, 72, 87, 58];
+const devices = [
+  ['North campus', '1,284', '+12.4%'],
+  ['Production A', '968', '+8.1%'],
+  ['Warehouse', '742', '-2.3%'],
+];
+---
+
+<div class="vision-app" aria-label="Vision visual dashboard editor preview">
+  <div class="vision-titlebar">
+    <div class="vision-brand"><span>V</span><b>Vision</b></div>
+    <div class="document-title"><span>Operations Cockpit</span><i>Saved</i></div>
+    <div class="document-actions"><span>Preview</span><span>Share</span><b>Publish</b></div>
+  </div>
+
+  <div class="vision-toolbar">
+    <div><button>↶</button><button>↷</button><i></i><button>100%</button></div>
+    <div class="device-size"><button>Desktop</button><button>1440 × 900</button></div>
+    <div><button>Grid</button><button>Snap</button></div>
+  </div>
+
+  <div class="vision-workspace">
+    <aside class="component-panel">
+      <div class="panel-tabs"><button class="active">Components</button><button>Assets</button></div>
+      <div class="component-search">⌕ &nbsp;Search components</div>
+      <p class="panel-label">Charts</p>
+      <div class="component-grid">
+        <div><i class="chart-icon bars"></i><span>Bar chart</span></div>
+        <div><i class="chart-icon line"></i><span>Line chart</span></div>
+        <div><i class="chart-icon pie"></i><span>Pie chart</span></div>
+        <div><i class="chart-icon gauge"></i><span>Gauge</span></div>
+      </div>
+      <p class="panel-label">Data</p>
+      <div class="component-grid compact">
+        <div><i class="table-icon"></i><span>Table</span></div>
+        <div><i class="number-icon">12</i><span>Number</span></div>
+      </div>
+      <p class="panel-label">Layers</p>
+      <div class="layer-list">
+        <div><span>⌄</span><b>Dashboard</b></div>
+        <div class="nested"><span>▦</span><b>Header</b></div>
+        <div class="nested selected"><span>▥</span><b>Energy chart</b><i>●</i></div>
+        <div class="nested"><span>▤</span><b>Device status</b></div>
+        <div class="nested"><span>▣</span><b>KPI cards</b></div>
+      </div>
+    </aside>
+
+    <main class="design-stage">
+      <div class="ruler ruler-x"><span>0</span><span>360</span><span>720</span><span>1080</span><span>1440</span></div>
+      <div class="ruler ruler-y"><span>0</span><span>300</span><span>600</span><span>900</span></div>
+      <div class="dashboard-canvas">
+        <header class="dashboard-header">
+          <div><span class="dashboard-mark"></span><b>Operations Cockpit</b><small>Real-time overview</small></div>
+          <div class="dashboard-time"><span>19 JUN 2026</span><b>14:32:08</b></div>
+        </header>
+        <section class="kpi-row">
+          <article><small>ONLINE DEVICES</small><strong>2,994</strong><span class="up">↑ 9.8%</span></article>
+          <article><small>ACTIVE POWER</small><strong>8.42 <i>MW</i></strong><span class="up">↑ 4.2%</span></article>
+          <article><small>ALERTS</small><strong>12</strong><span class="warning">3 critical</span></article>
+        </section>
+        <section class="dashboard-grid">
+          <article class="energy-card selected-widget">
+            <div class="widget-title"><div><b>Energy consumption</b><span>Last 7 days</span></div><strong>42.8 MWh</strong></div>
+            <div class="chart-area">
+              <div class="chart-axis"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
+              <div class="bar-chart">
+                {bars.map((height, index) => <div><i style={`--bar-height:${height}%`}></i><span>{['M','T','W','T','F','S','S'][index]}</span></div>)}
+              </div>
+            </div>
+            <i class="resize-handle tl"></i><i class="resize-handle tr"></i><i class="resize-handle bl"></i><i class="resize-handle br"></i>
+            <span class="widget-size">620 × 286</span>
+          </article>
+          <article class="device-card">
+            <div class="widget-title"><div><b>Device status</b><span>Live telemetry</span></div><i class="live-dot"></i></div>
+            <div class="device-table">
+              {devices.map(([name, value, change], index) => (
+                <div><i class:list={[index === 2 ? 'warn-dot' : 'ok-dot']}></i><span>{name}</span><b>{value}</b><em class:list={[change.startsWith('-') ? 'negative' : 'positive']}>{change}</em></div>
+              ))}
+            </div>
+          </article>
+        </section>
+      </div>
+    </main>
+
+    <aside class="property-panel">
+      <div class="property-tabs"><button class="active">Design</button><button>Data</button><button>Events</button></div>
+      <div class="selection-name"><i></i><div><b>Energy chart</b><span>BarChart #chart_04</span></div><span>•••</span></div>
+      <section class="property-section">
+        <h4>Position & size <span>⌃</span></h4>
+        <div class="field-grid"><label>X<input value="128" readonly /></label><label>Y<input value="214" readonly /></label><label>W<input value="620" readonly /></label><label>H<input value="286" readonly /></label></div>
+      </section>
+      <section class="property-section">
+        <h4>Appearance <span>⌃</span></h4>
+        <label class="property-row"><span>Background</span><i class="color-swatch"></i><code>#111C2E</code></label>
+        <label class="property-row"><span>Opacity</span><input type="range" value="100" readonly /></label>
+        <label class="property-row"><span>Radius</span><code>12 px</code></label>
+      </section>
+      <section class="property-section">
+        <h4>Chart <span>⌃</span></h4>
+        <label class="property-row"><span>Series</span><code>consumption</code></label>
+        <label class="property-row"><span>Stack</span><span class="switch on"></span></label>
+        <label class="property-row"><span>Legend</span><span class="switch"></span></label>
+      </section>
+    </aside>
+  </div>
+</div>
+
+<style>
+  .vision-app { min-width: 880px; overflow: hidden; border: 1px solid #263247; border-radius: 18px; background: #0b101a; color: #dbe8fb; box-shadow: 0 24px 70px rgb(1 7 18 / .42); font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+  button { font: inherit; }
+  .vision-titlebar { height: 42px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0 13px; border-bottom: 1px solid #263247; background: #111927; font-size: 9px; }
+  .vision-brand, .document-title, .document-actions { display: flex; align-items: center; gap: 8px; }.vision-brand span { width: 22px; height: 22px; display: grid; place-items: center; border-radius: 7px; background: linear-gradient(135deg, #2fc0ff, #4778ff); color: white; font-size: 11px; font-weight: 800; }.vision-brand b { letter-spacing: .04em; }.document-title { color: #a5b4c9; }.document-title i { padding: 2px 5px; border-radius: 5px; background: rgb(49 190 114 / .1); color: #4bd68d; font-size: 7px; font-style: normal; }.document-actions { justify-self: end; }.document-actions span { color: #8190a5; }.document-actions b { padding: 5px 9px; border-radius: 6px; background: #2d79ff; color: white; }
+  .vision-toolbar { height: 32px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0 9px; border-bottom: 1px solid #263247; background: #0f1724; }.vision-toolbar > div { display: flex; align-items: center; gap: 3px; }.vision-toolbar > div:last-child { justify-self: end; }.vision-toolbar button { height: 22px; padding: 0 7px; border: 1px solid transparent; border-radius: 5px; background: transparent; color: #718198; font-size: 8px; }.vision-toolbar button:hover, .device-size button:first-child { border-color: #263247; background: #151f2f; color: #b9c9de; }.vision-toolbar i { width: 1px; height: 15px; margin: 0 3px; background: #263247; }
+  .vision-workspace { height: 440px; display: grid; grid-template-columns: 180px minmax(510px, 1fr) 190px; }
+  .component-panel, .property-panel { background: #101824; }.component-panel { border-right: 1px solid #263247; }.property-panel { border-left: 1px solid #263247; }
+  .panel-tabs, .property-tabs { height: 34px; display: flex; padding: 0 8px; border-bottom: 1px solid #263247; }.panel-tabs button, .property-tabs button { flex: 1; border: 0; border-bottom: 2px solid transparent; background: transparent; color: #64748b; font-size: 8px; }.panel-tabs button.active, .property-tabs button.active { border-color: #2d8cff; color: #c8daf1; }
+  .component-search { height: 27px; display: flex; align-items: center; margin: 9px; padding: 0 8px; border: 1px solid #263247; border-radius: 6px; background: #0c131f; color: #56667d; font-size: 8px; }.panel-label { margin: 13px 10px 7px; color: #526177; font-size: 7px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
+  .component-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; padding: 0 9px; }.component-grid > div { height: 47px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; border: 1px solid #263247; border-radius: 7px; background: #131d2c; color: #8ea0b8; font-size: 7px; }.component-grid > div:hover { border-color: #2d79ff; }.chart-icon { width: 24px; height: 15px; display: block; position: relative; }.chart-icon.bars { border-bottom: 1px solid #496079; background: linear-gradient(90deg, transparent 0 7%, #2d79ff 7% 20%, transparent 20% 31%, #41baff 31% 44%, transparent 44% 55%, #2d79ff 55% 68%, transparent 68% 79%, #41baff 79% 92%, transparent 92%); }.chart-icon.line { border-bottom: 1px solid #496079; background: linear-gradient(155deg, transparent 43%, #41baff 44% 49%, transparent 50%) 0 0/12px 15px repeat-x; }.chart-icon.pie { width: 16px; height: 16px; border: 4px solid #2d79ff; border-right-color: #41baff; border-radius: 50%; }.chart-icon.gauge { width: 20px; height: 10px; border: 4px solid #2d79ff; border-bottom: 0; border-radius: 20px 20px 0 0; }.component-grid.compact > div { height: 38px; }.table-icon { width: 22px; height: 13px; border: 1px solid #41baff; background: repeating-linear-gradient(0deg, transparent 0 3px, #2d79ff 3px 4px); }.number-icon { color: #41baff; font-size: 12px; font-style: normal; }
+  .layer-list { padding: 0 8px; }.layer-list > div { height: 26px; display: flex; align-items: center; gap: 6px; padding: 0 6px; border-radius: 5px; color: #7e8fa6; font-size: 8px; }.layer-list div b { font-weight: 500; }.layer-list div.nested { padding-left: 17px; }.layer-list div.selected { background: rgb(45 121 255 / .13); color: #65bfff; }.layer-list div i { margin-left: auto; color: #4bd68d; font-size: 6px; }
+  .design-stage { position: relative; overflow: hidden; background: #080d15; background-image: radial-gradient(#223047 1px, transparent 1px); background-size: 12px 12px; }.ruler { position: absolute; z-index: 2; display: flex; color: #46556b; font-size: 6px; }.ruler-x { inset: 0 0 auto 18px; height: 16px; justify-content: space-between; padding: 4px 12px 0; border-bottom: 1px solid #202b3c; background: #0c131f; }.ruler-y { inset: 16px auto 0 0; width: 18px; flex-direction: column; justify-content: space-between; padding: 8px 2px; border-right: 1px solid #202b3c; background: #0c131f; }
+  .dashboard-canvas { position: absolute; top: 34px; left: 42px; width: calc(100% - 68px); min-width: 460px; height: 375px; padding: 14px; overflow: hidden; border: 1px solid #30425f; background: #07101f; box-shadow: 0 16px 45px rgb(0 0 0 / .45); }.dashboard-header { display: flex; align-items: center; justify-content: space-between; height: 38px; border-bottom: 1px solid #182943; }.dashboard-header > div { display: flex; align-items: center; gap: 7px; }.dashboard-mark { width: 5px; height: 22px; border-radius: 3px; background: linear-gradient(#31c5ff, #3274ff); box-shadow: 0 0 12px rgb(49 197 255 / .6); }.dashboard-header b { font-size: 10px; }.dashboard-header small { color: #516680; font-size: 7px; }.dashboard-time { flex-direction: column; align-items: end !important; gap: 1px !important; }.dashboard-time span { color: #4c607a; font-size: 5px; }.dashboard-time b { color: #41baff; font: 8px "JetBrains Mono", monospace; }
+  .kpi-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 10px 0; }.kpi-row article { position: relative; padding: 9px 10px; border: 1px solid #172844; border-radius: 7px; background: linear-gradient(145deg, rgb(21 40 67 / .75), rgb(9 23 43 / .85)); }.kpi-row small { display: block; margin-bottom: 5px; color: #536985; font-size: 5px; }.kpi-row strong { font: 14px "JetBrains Mono", monospace; }.kpi-row strong i { color: #6a83a2; font-size: 6px; font-style: normal; }.kpi-row > article > span { position: absolute; right: 8px; bottom: 10px; font-size: 6px; }.up { color: #4bd68d; }.warning { color: #ffaf4d; }
+  .dashboard-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 8px; }.dashboard-grid article { min-width: 0; padding: 10px; border: 1px solid #172844; border-radius: 7px; background: rgb(9 24 45 / .82); }.widget-title { display: flex; justify-content: space-between; align-items: start; }.widget-title b, .widget-title span { display: block; }.widget-title b { font-size: 7px; }.widget-title span { margin-top: 3px; color: #4c607a; font-size: 5px; }.widget-title strong { color: #41baff; font: 10px "JetBrains Mono", monospace; }
+  .selected-widget { position: relative; border-color: #2d8cff !important; box-shadow: 0 0 0 1px rgb(45 140 255 / .35); }.resize-handle { position: absolute; width: 5px; height: 5px; border: 1px solid #d7efff; background: #2d8cff; }.resize-handle.tl { top: -3px; left: -3px; }.resize-handle.tr { top: -3px; right: -3px; }.resize-handle.bl { bottom: -3px; left: -3px; }.resize-handle.br { right: -3px; bottom: -3px; }.widget-size { position: absolute; right: 0; bottom: -12px; padding: 2px 4px; border-radius: 3px; background: #2d79ff; color: white; font-size: 5px; }
+  .chart-area { height: 116px; display: grid; grid-template-columns: 18px 1fr; margin-top: 7px; }.chart-axis { display: flex; flex-direction: column; justify-content: space-between; padding-bottom: 12px; color: #3f536d; font-size: 5px; }.bar-chart { display: flex; align-items: end; justify-content: space-around; border-left: 1px solid #172844; border-bottom: 1px solid #172844; background: repeating-linear-gradient(0deg, transparent 0 21px, rgb(40 62 91 / .3) 21px 22px); }.bar-chart > div { height: 100%; display: flex; flex-direction: column; justify-content: end; align-items: center; gap: 4px; }.bar-chart i { width: 9px; height: var(--bar-height); max-height: 94px; border-radius: 2px 2px 0 0; background: linear-gradient(#31c5ff, #2d69f0); box-shadow: 0 0 8px rgb(49 197 255 / .2); }.bar-chart span { color: #536985; font-size: 5px; }
+  .live-dot { width: 5px; height: 5px; border-radius: 50%; background: #4bd68d; box-shadow: 0 0 7px #4bd68d; }.device-table { margin-top: 12px; }.device-table > div { display: grid; grid-template-columns: 6px 1fr 30px 31px; align-items: center; gap: 4px; padding: 9px 0; border-top: 1px solid #172844; font-size: 6px; }.device-table i { width: 4px; height: 4px; border-radius: 50%; }.ok-dot { background: #4bd68d; }.warn-dot { background: #ffaf4d; }.device-table b { font: 7px "JetBrains Mono", monospace; }.device-table em { font-size: 5px; font-style: normal; text-align: right; }.positive { color: #4bd68d; }.negative { color: #ff6f7f; }
+  .selection-name { height: 48px; display: flex; align-items: center; gap: 8px; padding: 0 10px; border-bottom: 1px solid #263247; }.selection-name > i { width: 22px; height: 22px; border: 1px solid #2d79ff; border-radius: 5px; background: repeating-linear-gradient(90deg, #2d79ff 0 3px, transparent 3px 6px); }.selection-name div { min-width: 0; flex: 1; }.selection-name b, .selection-name span { display: block; }.selection-name b { font-size: 8px; }.selection-name div span { margin-top: 2px; color: #56667d; font-size: 6px; }.selection-name > span { color: #56667d; }
+  .property-section { padding: 10px; border-bottom: 1px solid #263247; }.property-section h4 { display: flex; justify-content: space-between; margin: 0 0 9px; font-size: 8px; }.property-section h4 span { color: #56667d; }.field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }.field-grid label { display: flex; align-items: center; gap: 4px; color: #56667d; font-size: 7px; }.field-grid input { width: 100%; min-width: 0; padding: 5px; border: 1px solid #263247; border-radius: 5px; background: #0b121d; color: #9db0c8; font-size: 7px; }.property-row { min-height: 28px; display: flex; align-items: center; gap: 6px; color: #65758a; font-size: 7px; }.property-row > span:first-child { flex: 1; }.property-row code { padding: 4px 5px; border: 1px solid #263247; border-radius: 4px; color: #9db0c8; font-size: 6px; }.property-row input { width: 70px; accent-color: #2d79ff; }.color-swatch { width: 13px; height: 13px; border: 1px solid #38516f; border-radius: 3px; background: #111c2e; }.switch { width: 22px; height: 12px; position: relative; border-radius: 10px; background: #2a3545; }.switch::after { content: ""; position: absolute; top: 2px; left: 2px; width: 8px; height: 8px; border-radius: 50%; background: #7b8aa0; }.switch.on { background: #2d79ff; }.switch.on::after { left: 12px; background: white; }
+  @media (max-width: 1020px) { .vision-workspace { grid-template-columns: 165px minmax(510px, 1fr) 160px; } }
+</style>
