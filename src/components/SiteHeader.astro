@@ -1,0 +1,51 @@
+---
+import { controls, navigation } from '../content/portfolio';
+---
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="site-mark" href="#top" aria-label="Tyrival Chow home">
+      <span class="site-mark__dot" aria-hidden="true"></span>
+      <span>Tyrival Chow</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a
+        href="#products"
+        data-i18n
+        data-i18n-zh={navigation.work.zh}
+        data-i18n-en={navigation.work.en}
+      >{navigation.work.zh}</a>
+      <a href="https://github.com/tyrival" target="_blank" rel="noopener noreferrer">
+        {navigation.github.zh}
+      </a>
+    </nav>
+
+    <div class="site-controls">
+      <button
+        class="control-button language-toggle"
+        type="button"
+        data-language-toggle
+        data-label-zh={controls.language.zh}
+        data-label-en={controls.language.en}
+        aria-label={controls.language.zh}
+      >
+        <span data-language-indicator>EN</span>
+      </button>
+      <button
+        class="control-button theme-toggle"
+        type="button"
+        data-theme-toggle
+        data-light-label-zh={controls.themeLight.zh}
+        data-light-label-en={controls.themeLight.en}
+        data-dark-label-zh={controls.themeDark.zh}
+        data-dark-label-en={controls.themeDark.en}
+        aria-label={controls.themeDark.zh}
+        aria-pressed="false"
+      >
+        <span class="theme-toggle__sun" aria-hidden="true"></span>
+        <span class="theme-toggle__moon" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</header>

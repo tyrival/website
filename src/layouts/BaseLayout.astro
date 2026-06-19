@@ -3,20 +3,92 @@ import '../styles/global.css';
 ---
 
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Tyrival Chow - Full-Stack Engineer / System Architect. Java, Frontend, Swift." />
-    <title>Tyrival Chow</title>
+    <meta name="description" content="Tyrival Chow — Full-Stack Engineer and product builder. Viabar, CommuKit, Vision." />
+    <meta name="theme-color" content="#f5f6f8" />
+    <title>Tyrival Chow — Product Builder</title>
     <link rel="icon" href="/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        const storedTheme = localStorage.getItem('tyrival-theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = storedTheme === 'light' || storedTheme === 'dark'
+          ? storedTheme
+          : systemDark ? 'dark' : 'light';
+        const storedLanguage = localStorage.getItem('tyrival-language');
+        const language = storedLanguage === 'zh' || storedLanguage === 'en'
+          ? storedLanguage
+          : navigator.language.toLowerCase().startsWith('zh') ? 'zh' : 'en';
+        root.dataset.theme = theme;
+        root.dataset.language = language;
+        root.lang = language === 'zh' ? 'zh-CN' : 'en';
+      })();
+    </script>
   </head>
-  <body class="min-h-screen">
-    <main class="mx-auto max-w-3xl px-6 py-16 md:py-24">
+  <body>
+    <main>
       <slot />
     </main>
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        const themeButton = document.querySelector('[data-theme-toggle]');
+        const languageButton = document.querySelector('[data-language-toggle]');
+        const themeMeta = document.querySelector('meta[name="theme-color"]');
+
+        const applyLanguage = (language, persist = true) => {
+          root.dataset.language = language;
+          root.lang = language === 'zh' ? 'zh-CN' : 'en';
+          document.querySelectorAll('[data-i18n]').forEach((node) => {
+            const value = node.dataset[language === 'zh' ? 'i18nZh' : 'i18nEn'];
+            if (value) node.textContent = value;
+          });
+          if (languageButton) {
+            languageButton.querySelector('[data-language-indicator]').textContent = language === 'zh' ? 'EN' : '中文';
+            languageButton.setAttribute('aria-label', languageButton.dataset[language === 'zh' ? 'labelZh' : 'labelEn']);
+          }
+          if (persist) localStorage.setItem('tyrival-language', language);
+          updateThemeControl();
+        };
+
+        const updateThemeControl = () => {
+          if (!themeButton) return;
+          const language = root.dataset.language === 'en' ? 'en' : 'zh';
+          const isDark = root.dataset.theme === 'dark';
+          const key = isDark
+            ? language === 'zh' ? 'lightLabelZh' : 'lightLabelEn'
+            : language === 'zh' ? 'darkLabelZh' : 'darkLabelEn';
+          themeButton.setAttribute('aria-label', themeButton.dataset[key]);
+          themeButton.setAttribute('aria-pressed', String(isDark));
+          if (themeMeta) themeMeta.setAttribute('content', isDark ? '#0a0d12' : '#f5f6f8');
+        };
+
+        languageButton?.addEventListener('click', () => {
+          applyLanguage(root.dataset.language === 'zh' ? 'en' : 'zh');
+        });
+
+        themeButton?.addEventListener('click', () => {
+          root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+          localStorage.setItem('tyrival-theme', root.dataset.theme);
+          updateThemeControl();
+        });
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+          if (!localStorage.getItem('tyrival-theme')) {
+            root.dataset.theme = event.matches ? 'dark' : 'light';
+            updateThemeControl();
+          }
+        });
+
+        applyLanguage(root.dataset.language === 'en' ? 'en' : 'zh', false);
+      })();
+    </script>
   </body>
 </html>
