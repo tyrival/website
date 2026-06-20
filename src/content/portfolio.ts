@@ -123,15 +123,15 @@ export const products: Product[] = [
     index: '03',
     name: 'Fringe',
     description: {
-      zh: '一款剪贴板增强与便签管理工具，支持富文本编辑、颜色标签、搜索与备份。',
-      en: 'A clipboard enhancement and note management tool with rich text editing, color tags, search, and backup.',
-      fr: 'Un outil d\'amélioration du presse-papiers et de gestion de notes avec édition de texte enrichi, étiquettes de couleur, recherche et sauvegarde.',
-      es: 'Una herramienta de mejora del portapapeles y gestión de notas con edición de texto enriquecido, etiquetas de color, búsqueda y copia de seguridad.',
-      de: 'Ein Clipboard-Erweiterungs- und Notizverwaltungstool mit Rich-Text-Bearbeitung, Farb-Tags, Suche und Backup.',
-      ja: 'リッチテキスト編集、カラータグ、検索、バックアップを備えたクリップボード強化とメモ管理ツール。',
-      ko: '리치 텍스트 편집, 색상 태그, 검색 및 백업을 갖춘 클립보드 강화 및 메모 관리 도구입니다.',
+      zh: '一款便签管理工具，支持Markdown格式、颜色标签、搜索与备份。',
+      en: 'A note management tool with Markdown formatting, color tags, search, and backup.',
+      fr: 'Un outil de gestion de notes avec formatage Markdown, étiquettes de couleur, recherche et sauvegarde.',
+      es: 'Una herramienta de gestión de notas con formato Markdown, etiquetas de color, búsqueda y copia de seguridad.',
+      de: 'Ein Notizverwaltungstool mit Markdown-Formatierung, Farb-Tags, Suche und Backup.',
+      ja: 'Markdown形式、カラータグ、検索、バックアップを備えたメモ管理ツール。',
+      ko: 'Markdown 형식, 색상 태그, 검색 및 백업을 갖춘 메모 관리 도구입니다.',
     },
-    tags: ['macOS', 'Clipboard', 'SwiftUI'],
+    tags: ['macOS', 'Markdown', 'SwiftUI'],
     links: [
       {
         label: {
