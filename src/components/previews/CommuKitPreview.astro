@@ -48,16 +48,21 @@
     </section>
 
     <aside class="session-inspector">
-      <p class="inspector-label">Session</p>
-      <div class="inspector-row"><span>Protocol</span><b>Modbus TCP</b></div>
-      <div class="inspector-row"><span>Mode</span><b>Master</b></div>
-      <div class="inspector-row"><span>Unit ID</span><b>1</b></div>
-      <p class="inspector-label pipeline">Pipeline</p>
-      <div class="pipeline-step"><i>1</i><div><b>PARSE</b><span>Extract registers</span></div></div>
-      <div class="pipeline-line"></div>
-      <div class="pipeline-step"><i>2</i><div><b>COMPUTE</b><span>Scale raw values</span></div></div>
-      <div class="pipeline-line"></div>
-      <div class="pipeline-step"><i>3</i><div><b>VALIDATE</b><span>CRC-16 check</span></div></div>
+      <div class="workflow-heading">
+        <p class="inspector-label">Communication Workflow</p>
+        <span>Running</span>
+      </div>
+      <strong class="workflow-name">Device telemetry handshake</strong>
+      <div class="workflow-step complete"><i>✓</i><div><b>Send request</b><span>01 03 00 00 00 02</span></div></div>
+      <div class="workflow-line complete"></div>
+      <div class="workflow-step complete"><i>✓</i><div><b>Wait for matching reply</b><span>temperature &gt; 20</span></div></div>
+      <div class="workflow-line"></div>
+      <div class="workflow-step active"><i>3</i><div><b>Parser: Modbus Response</b><span>Extract registers</span></div></div>
+      <div class="run-log">
+        <span>Run log</span>
+        <code>reply.temperature = 24.5</code>
+        <code>next.deviceId = A-104</code>
+      </div>
     </aside>
   </div>
 </div>
@@ -83,6 +88,6 @@
   .message { display: flex; flex-direction: column; align-items: flex-start; }.message.sent { align-items: flex-end; }.message small { margin: 0 4px 3px; color: var(--preview-faint); font-size: 7px; }.message code { padding: 8px 11px; border: 1px solid var(--preview-border); border-radius: 12px 12px 12px 4px; background: var(--preview-panel-strong); color: var(--preview-text); font-size: 9px; }.message.sent code { border-color: var(--accent); border-radius: 12px 12px 4px 12px; background: var(--accent); color: white; }
   .parser-result { width: 77%; padding: 9px 10px; border: 1px solid color-mix(in srgb, #31be72 25%, transparent); border-radius: 11px; background: color-mix(in srgb, #31be72 6%, var(--preview-panel)); }.parser-label { display: flex; align-items: center; gap: 5px; margin-bottom: 6px; color: #31be72; font-size: 8px; font-weight: 700; }.parser-label small { margin-left: auto; color: var(--preview-faint); font-weight: 400; }.register { display: grid; grid-template-columns: 1fr 38px 55px; padding: 3px 0; border-top: 1px solid color-mix(in srgb, #31be72 13%, transparent); font-size: 8px; }.register b { color: var(--accent); }.register code { color: var(--preview-faint); }.crc { margin-top: 4px; color: #31be72; font: 7px "JetBrains Mono", monospace; }
   .composer { padding: 8px 11px 11px; border-top: 1px solid var(--preview-border); background: var(--preview-panel); }.composer-tools { display: flex; gap: 5px; margin-bottom: 5px; color: var(--preview-faint); font-size: 7px; }.composer-tools span:last-child { margin-left: auto; }.composer-input { height: 34px; display: flex; align-items: center; padding-left: 10px; border: 1px solid var(--preview-border); border-radius: 9px; background: var(--preview-canvas); }.composer-input code { flex: 1; color: var(--preview-muted); font-size: 9px; }.composer-input button { width: 25px; height: 25px; margin-right: 4px; border: 0; border-radius: 7px; background: var(--accent); color: white; }
-  .session-inspector { padding: 13px; border-left: 1px solid var(--preview-border); background: var(--preview-panel); }.inspector-label { margin: 0 0 8px; color: var(--preview-faint); font-size: 9px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }.inspector-row { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid var(--preview-border); font-size: 8px; }.inspector-row span { color: var(--preview-faint); }.pipeline { margin-top: 18px; }.pipeline-step { display: flex; align-items: center; gap: 8px; }.pipeline-step i { width: 20px; height: 20px; display: grid; place-items: center; border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); border-radius: 50%; background: color-mix(in srgb, var(--accent) 8%, transparent); color: var(--accent); font-size: 8px; font-style: normal; }.pipeline-step b, .pipeline-step span { display: block; }.pipeline-step b { font-size: 8px; }.pipeline-step span { margin-top: 2px; color: var(--preview-faint); font-size: 7px; }.pipeline-line { width: 1px; height: 13px; margin-left: 10px; background: var(--preview-border); }
+  .session-inspector { padding: 13px; border-left: 1px solid var(--preview-border); background: var(--preview-panel); }.inspector-label { margin: 0; color: var(--preview-faint); font-size: 8px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }.workflow-heading { display: flex; align-items: center; justify-content: space-between; gap: 5px; }.workflow-heading > span { padding: 3px 5px; border-radius: 8px; background: color-mix(in srgb, #31be72 12%, transparent); color: #31be72; font-size: 7px; font-weight: 700; }.workflow-name { display: block; margin: 8px 0 14px; font-size: 9px; }.workflow-step { display: flex; align-items: center; gap: 7px; }.workflow-step i { width: 20px; height: 20px; flex: 0 0 20px; display: grid; place-items: center; border: 1px solid var(--preview-border); border-radius: 50%; color: var(--preview-faint); font-size: 8px; font-style: normal; }.workflow-step.complete i { border-color: color-mix(in srgb, #31be72 35%, transparent); background: color-mix(in srgb, #31be72 8%, transparent); color: #31be72; }.workflow-step.active i { border-color: color-mix(in srgb, var(--accent) 40%, transparent); background: color-mix(in srgb, var(--accent) 9%, transparent); color: var(--accent); }.workflow-step b, .workflow-step span { display: block; }.workflow-step b { font-size: 7px; line-height: 1.25; }.workflow-step span { margin-top: 2px; overflow: hidden; color: var(--preview-faint); font: 6px "JetBrains Mono", monospace; text-overflow: ellipsis; white-space: nowrap; }.workflow-line { width: 1px; height: 15px; margin-left: 10px; background: var(--preview-border); }.workflow-line.complete { background: color-mix(in srgb, #31be72 35%, var(--preview-border)); }.run-log { margin-top: 16px; padding: 8px; border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--preview-border)); border-radius: 8px; background: color-mix(in srgb, var(--accent) 4%, var(--preview-canvas)); }.run-log span, .run-log code { display: block; }.run-log span { margin-bottom: 5px; color: var(--accent); font-size: 7px; font-weight: 750; text-transform: uppercase; }.run-log code { overflow: hidden; color: var(--preview-faint); font-size: 6px; line-height: 1.7; text-overflow: ellipsis; white-space: nowrap; }
   @media (max-width: 980px) { .commukit-workspace { grid-template-columns: 160px minmax(380px, 1fr); } .session-inspector { display: none; } .commukit-tabs { padding-left: 160px; } }
 </style>

@@ -31,6 +31,19 @@ done
 
 require '所见即所得的数据可视化驾驶舱平台' src/content/portfolio.ts
 require 'A WYSIWYG data visualization cockpit platform' src/content/portfolio.ts
+require '多协议网络调试工具，内置可编程消息解析器、通讯工作流、协议自动识别以及网络工具集。' src/content/portfolio.ts
+require 'A multi-protocol network debugging tool with a programmable message parser, communication workflows, automatic protocol detection, and a network tool suite.' src/content/portfolio.ts
+require '通信ワークフロー' src/content/portfolio.ts
+require '통신 워크플로' src/content/portfolio.ts
+require 'Kommunikations-Workflows' src/content/portfolio.ts
+require 'workflows de communication' src/content/portfolio.ts
+require 'flujos de comunicación' src/content/portfolio.ts
+forbid '工业物联网协议支持' src/content/portfolio.ts
+forbid 'industrial IoT protocol support' src/content/portfolio.ts
+require 'Communication Workflow' src/components/previews/CommuKitPreview.astro
+require 'Wait for matching reply' src/components/previews/CommuKitPreview.astro
+require 'Parser: Modbus Response' src/components/previews/CommuKitPreview.astro
+require 'Run log' src/components/previews/CommuKitPreview.astro
 require 'data-i18n' src
 require 'localStorage' src/layouts/BaseLayout.astro
 require 'prefers-color-scheme' src/layouts/BaseLayout.astro
