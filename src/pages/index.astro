@@ -7,10 +7,11 @@ import Footer from '../components/Footer.astro';
 import ViabarPreview from '../components/previews/ViabarPreview.astro';
 import CommuKitPreview from '../components/previews/CommuKitPreview.astro';
 import FringePreview from '../components/previews/FringePreview.astro';
+import TokenPrismPreview from '../components/previews/TokenPrismPreview.astro';
 import VisionPreview from '../components/previews/VisionPreview.astro';
 import { products } from '../content/portfolio';
 
-const [viabar, commukit, fringe, vision] = products;
+const [viabar, commukit, fringe, tokenprism, vision] = products;
 ---
 
 <BaseLayout>
@@ -21,6 +22,7 @@ const [viabar, commukit, fringe, vision] = products;
       <ProductShowcase product={viabar}><ViabarPreview /></ProductShowcase>
       <ProductShowcase product={commukit}><CommuKitPreview /></ProductShowcase>
       <ProductShowcase product={fringe}><FringePreview /></ProductShowcase>
+      <ProductShowcase product={tokenprism}><TokenPrismPreview /></ProductShowcase>
       <ProductShowcase product={vision}><VisionPreview /></ProductShowcase>
     </div>
     <Footer />

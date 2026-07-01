@@ -1,0 +1,428 @@
+<div class="tp-app" aria-label="TokenPrism application interface preview">
+  <div class="tp-titlebar">
+    <div class="traffic-lights" aria-hidden="true"><i></i><i></i><i></i></div>
+    <span>TokenPrism</span>
+  </div>
+
+  <!-- Menu bar icon strip -->
+  <div class="tp-menubar-strip">
+    <span class="strip-label">Menu Bar</span>
+    <div class="menu-icons">
+      <div class="menu-icon" style="--icon-bg:linear-gradient(135deg, #12D2AE, #2EEFD3)">
+        <span class="icon-pct">100%</span>
+        <span class="icon-time">3h 12m</span>
+      </div>
+      <div class="menu-icon" style="--icon-bg:linear-gradient(135deg, #12D2AE, #2EEFD3)">
+        <span class="icon-pct">75%</span>
+        <span class="icon-time">2h 48m</span>
+      </div>
+      <div class="menu-icon" style="--icon-bg:linear-gradient(135deg, #FEA053, #FFB74D)">
+        <span class="icon-pct">50%</span>
+        <span class="icon-time">1h 22m</span>
+      </div>
+      <div class="menu-icon" style="--icon-bg:linear-gradient(135deg, #FEA053, #FFB74D)">
+        <span class="icon-pct">25%</span>
+        <span class="icon-time">42m</span>
+      </div>
+      <div class="menu-icon critical" style="--icon-bg:linear-gradient(135deg, #FF607E, #FF8A9E)">
+        <span class="icon-pct">5%</span>
+        <span class="icon-time">8m</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main dashboard -->
+  <div class="tp-dashboard">
+    <!-- Codex card -->
+    <div class="tp-provider-card">
+      <div class="provider-header">
+        <span class="provider-badge codex">Codex</span>
+        <span class="provider-reset">Resets in 2h 14m</span>
+      </div>
+      <div class="usage-ring-container">
+        <div class="usage-ring" style="--usage:72;">
+          <span class="ring-value">72<span class="ring-unit">%</span></span>
+        </div>
+      </div>
+      <div class="usage-stats">
+        <div class="stat-row">
+          <span class="stat-label">Used</span>
+          <span class="stat-value">2.8M</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Remaining</span>
+          <span class="stat-value">7.2M</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Limit</span>
+          <span class="stat-value">10M</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Claude card -->
+    <div class="tp-provider-card">
+      <div class="provider-header">
+        <span class="provider-badge claude">Claude</span>
+        <span class="provider-reset">Resets in 5h 48m</span>
+      </div>
+      <div class="usage-ring-container">
+        <div class="usage-ring" style="--usage:45;">
+          <span class="ring-value">45<span class="ring-unit">%</span></span>
+        </div>
+      </div>
+      <div class="usage-stats">
+        <div class="stat-row">
+          <span class="stat-label">Used</span>
+          <span class="stat-value">450K</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Remaining</span>
+          <span class="stat-value">550K</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Limit</span>
+          <span class="stat-value">1M</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Agent activity panel -->
+    <div class="tp-agent-panel">
+      <div class="agent-heading">
+        <span class="agent-dot active"></span>
+        <span>Agent Activity</span>
+      </div>
+      <div class="agent-list">
+        <div class="agent-row">
+          <span class="agent-source codex-bg">Codex</span>
+          <span class="agent-file">main.py</span>
+          <span class="agent-status working">Working</span>
+        </div>
+        <div class="agent-row">
+          <span class="agent-source claude-bg">Claude</span>
+          <span class="agent-file">idle</span>
+          <span class="agent-status waiting">Waiting</span>
+        </div>
+        <div class="agent-row dim">
+          <span class="agent-source codex-bg">Codex</span>
+          <span class="agent-file">utils.ts</span>
+          <span class="agent-status done">2m ago</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .tp-app {
+    min-width: 760px;
+    overflow: hidden;
+    border: 1px solid var(--preview-border);
+    border-radius: 18px;
+    background: var(--preview-bg);
+    color: var(--preview-text);
+    box-shadow: var(--preview-shadow);
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  /* Title bar */
+  .tp-titlebar {
+    height: 40px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 0 15px;
+    border-bottom: 1px solid var(--preview-border);
+    color: var(--preview-muted);
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .traffic-lights { display: flex; gap: 7px; }
+  .traffic-lights i { width: 11px; height: 11px; border-radius: 50%; background: #ff5f57; }
+  .traffic-lights i:nth-child(2) { background: #febc2e; }
+  .traffic-lights i:nth-child(3) { background: #28c840; }
+
+  /* Menu bar strip */
+  .tp-menubar-strip {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--preview-border);
+    background: var(--preview-panel);
+  }
+
+  .strip-label {
+    color: var(--preview-faint);
+    font-size: 9px;
+    font-weight: 650;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .menu-icons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .menu-icon {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: var(--icon-bg);
+    color: #fff;
+  }
+
+  .icon-pct {
+    font-size: 9px;
+    font-weight: 750;
+    font-family: "JetBrains Mono", monospace;
+  }
+
+  .icon-time {
+    font-size: 7px;
+    opacity: .85;
+    font-family: "JetBrains Mono", monospace;
+  }
+
+  .menu-icon.critical .icon-pct {
+    animation: none;
+  }
+
+  /* Dashboard */
+  .tp-dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.2fr;
+    gap: 10px;
+    padding: 12px;
+    background: var(--preview-canvas);
+  }
+
+  /* Provider cards */
+  .tp-provider-card {
+    border: 1px solid var(--preview-border);
+    border-radius: 13px;
+    background: var(--preview-panel);
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .provider-header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+  }
+
+  .provider-badge {
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .provider-badge.codex {
+    background: color-mix(in srgb, #287DFF 12%, transparent);
+    color: #287DFF;
+  }
+
+  .provider-badge.claude {
+    background: color-mix(in srgb, #FEA053 12%, transparent);
+    color: #FEA053;
+  }
+
+  .provider-reset {
+    color: var(--preview-faint);
+    font-size: 8px;
+    font-family: "JetBrains Mono", monospace;
+  }
+
+  /* Usage ring */
+  .usage-ring-container {
+    position: relative;
+    width: 74px;
+    height: 74px;
+  }
+
+  .usage-ring {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: conic-gradient(
+      var(--ring-color, #287DFF) calc(var(--usage) * 3.6deg),
+      color-mix(in srgb, var(--ring-color, #287DFF) 10%, transparent) 0
+    );
+  }
+
+  .tp-provider-card:first-child .usage-ring {
+    --ring-color: #287DFF;
+  }
+
+  .tp-provider-card:nth-child(2) .usage-ring {
+    --ring-color: #FEA053;
+  }
+
+  .usage-ring::before {
+    content: "";
+    grid-area: 1/1;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: var(--preview-panel);
+  }
+
+  .ring-value {
+    position: relative;
+    grid-area: 1/1;
+    font-size: 20px;
+    font-weight: 720;
+    font-family: "JetBrains Mono", monospace;
+    color: var(--preview-text);
+    display: flex;
+    align-items: baseline;
+    gap: 1px;
+  }
+
+  .ring-unit {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--preview-muted);
+  }
+
+  /* Usage stats */
+  .usage-stats {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .stat-label {
+    color: var(--preview-faint);
+    font-size: 9px;
+  }
+
+  .stat-value {
+    color: var(--preview-text);
+    font-size: 10px;
+    font-weight: 650;
+    font-family: "JetBrains Mono", monospace;
+  }
+
+  /* Agent activity panel */
+  .tp-agent-panel {
+    border: 1px solid var(--preview-border);
+    border-radius: 13px;
+    background: var(--preview-panel);
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .agent-heading {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 10px;
+    font-weight: 650;
+  }
+
+  .agent-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #28c840;
+  }
+
+  .agent-dot.active {
+    box-shadow: 0 0 6px rgba(40, 200, 64, 0.5);
+  }
+
+  .agent-list {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .agent-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    border-radius: 8px;
+    background: var(--preview-panel-strong);
+    border: 1px solid var(--preview-border);
+  }
+
+  .agent-row.dim {
+    opacity: .5;
+  }
+
+  .agent-source {
+    padding: 2px 7px;
+    border-radius: 5px;
+    font-size: 8px;
+    font-weight: 700;
+    font-family: "JetBrains Mono", monospace;
+    color: #fff;
+  }
+
+  .agent-source.codex-bg {
+    background: #287DFF;
+  }
+
+  .agent-source.claude-bg {
+    background: #FEA053;
+  }
+
+  .agent-file {
+    flex: 1;
+    font-size: 10px;
+    color: var(--preview-text);
+    font-family: "JetBrains Mono", monospace;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .agent-status {
+    font-size: 8px;
+    font-weight: 650;
+  }
+
+  .agent-status.working {
+    color: #287DFF;
+  }
+
+  .agent-status.waiting {
+    color: #FEA053;
+  }
+
+  .agent-status.done {
+    color: var(--preview-faint);
+  }
+
+  @media (max-width: 820px) {
+    .tp-app { min-width: 640px; }
+    .tp-dashboard { grid-template-columns: 1fr 1fr; }
+    .tp-agent-panel { grid-column: 1 / -1; }
+  }
+</style>

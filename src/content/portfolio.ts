@@ -8,7 +8,7 @@ export interface ProductLink {
 }
 
 export interface Product {
-  id: 'viabar' | 'commukit' | 'fringe' | 'vision';
+  id: 'viabar' | 'commukit' | 'fringe' | 'tokenprism' | 'vision';
   index: string;
   name: string;
   description: LocalizedText;
@@ -143,8 +143,32 @@ export const products: Product[] = [
     ],
   },
   {
-    id: 'vision',
+    id: 'tokenprism',
     index: '04',
+    name: 'TokenPrism',
+    description: {
+      zh: '一款 macOS 菜单栏工具，实时监控 Codex 与 Claude API 用量、余额与配额重置倒计时。',
+      en: 'A macOS menu bar app that monitors Codex and Claude API usage, balance, and quota reset countdowns in real-time.',
+      fr: 'Une app de barre de menu macOS qui surveille en temps réel l\'utilisation, le solde et le compte à rebours de réinitialisation des quotas des API Codex et Claude.',
+      es: 'Una app de barra de menú para macOS que monitoriza el uso, saldo y cuenta atrás de reinicio de cuotas de las APIs de Codex y Claude en tiempo real.',
+      de: 'Eine macOS-Menüleisten-App zur Echtzeit-Überwachung von Codex- und Claude-API-Nutzung, Guthaben und Kontingent-Reset-Countdowns.',
+      ja: 'CodexおよびClaude APIの使用量、残高、クォータリセットのカウントダウンをリアルタイムで監視するmacOSメニューバーアプリ。',
+      ko: 'Codex 및 Claude API 사용량, 잔액, 할당량 초기화 카운트다운을 실시간으로 모니터링하는 macOS 메뉴 막대 앱.',
+    },
+    tags: ['macOS', 'API Monitor', 'SwiftUI'],
+    links: [
+      {
+        label: {
+          zh: '产品官网', en: 'Website', fr: 'Site officiel', es: 'Sitio web', de: 'Website',
+          ja: '公式サイト', ko: '공식 웹사이트',
+        },
+        url: 'https://tokenprism.tyrival.com/',
+      },
+    ],
+  },
+  {
+    id: 'vision',
+    index: '05',
     name: 'Vision',
     description: {
       zh: '所见即所得的数据可视化驾驶舱平台',
